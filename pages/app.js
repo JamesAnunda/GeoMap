@@ -3,22 +3,40 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Layout from '../components/layout';
 import Radar from 'radar-sdk-js';
+ 
+export default function app() {
+    return (
+        <div>
+            <Layout />
+            <h3>Google Map</h3>
+            <div className='map' />
+          <button onClick={initializeRadar} >Click here to test Radar Connection</button>
+        </div>
+    )
 
-function app () {
-    /* initialize Radar Connection */
-    Radar.initialize(prj_test_pk_2bdadc849b1f66b25824b05c8b1cdd7ac4103681);
-    Radar.setUserId(this.state.userId);
-    Radar.requestPermissions(true);
+    function initializeRadar () {
+        /* initialize Radar Connection */
+        Radar.initialize('prj_test_pk_2bdadc849b1f66b25824b05c8b1cdd7ac4103681');
+    
+        Radar.setUserId('userId');
+        // Radar.requestPermissions(true);
+    
+        Radar.trackOnce(function(status, location, user, events) {
 
-    Radar.trackOnce(function(status, location, user, events) {
-        if (status === Radar.STATUS.SUCCESS) {
-          if (user.place.chain.slug === '') {
-            // do something
-          } else {
-            Radar.on('error', (err) => {
-                // do something with err
-              });
-          }
-        }
-      });   
+            console.log('we\'re tracking!');
+            if (status === Radar.STATUS.SUCCESS) {
+              if (user.place.chain.slug === '') {
+                // do something
+                console.log('Connection made to API Servers');
+    
+              } else {
+                Radar.on('error', (err) => {
+                    // do something with err
+                    console.log('TCant Connect to Radar! Contact Developer!');
+                  });
+              }
+            } 
+        });
+    }
+    
 }

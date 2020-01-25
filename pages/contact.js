@@ -5,6 +5,9 @@ export default function Index() {
     return (
       <div> {/* Main Div */}
         <Layout />
+            <head>
+                    <title>Contact Us</title>
+                </head>
         <h1>Contact us here </h1>
         <div>
             <form method="post" action="#" className-="contactForum">

@@ -5,8 +5,7 @@ import Layout from '../components/layout';
 
 export default function Index() {
     return (
-        <div>
-            {/* /* for the navbar */ }
+        <div> {/* /* for the navbar */ }
             <Layout /> 
                 <head>
                     <title>Home</title>
